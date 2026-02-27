@@ -1,0 +1,7 @@
+registries:
+  - name: sparkrun-testing
+    description: Sparkrun testing registry for recipes, tuning configs, and benchmark profiles
+    recipes: testing/recipes
+    tuning: testing/tuning
+    benchmarks: testing/benchmarking
+    visible: false
