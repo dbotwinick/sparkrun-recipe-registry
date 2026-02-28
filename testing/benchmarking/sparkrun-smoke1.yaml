@@ -1,0 +1,9 @@
+framework: llama-benchy
+metadata:
+  description: Sparkrun Quick Smoke Benchmark v1
+args:
+  depth: [ 0, 4096 ]
+  pp: [ 2048 ]
+  tg: [ 128 ]
+  concurrency: [ 1 ]
+  prefix_caching: true
