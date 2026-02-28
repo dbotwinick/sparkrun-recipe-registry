@@ -5,3 +5,8 @@ registries:
     tuning: testing/tuning
     benchmarks: testing/benchmarking
     visible: false
+
+  - name: sparkrun-transitional
+    description: Transitional registry for recipes
+    recipes: transitional/recipes
+    visible: true
