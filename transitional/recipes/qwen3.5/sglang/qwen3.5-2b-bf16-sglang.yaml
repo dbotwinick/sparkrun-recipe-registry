@@ -1,7 +1,7 @@
 model: Qwen/Qwen3.5-2B
 runtime: sglang
 min_nodes: 1
-container: scitrera/dgx-spark-sglang:0.5.9-t5
+container: scitrera/dgx-spark-sglang:0.5.9-dev1-329817e2-t5
 
 metadata:
   description: Qwen3.5 2B (upstream, no quant) SGLang

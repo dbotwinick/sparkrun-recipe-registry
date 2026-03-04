@@ -1,7 +1,7 @@
 model: Qwen/Qwen3.5-122B-A10B-FP8
 runtime: sglang
 min_nodes: 2
-container: scitrera/dgx-spark-sglang:0.5.9-t5
+container: scitrera/dgx-spark-sglang:0.5.9-dev1-329817e2-t5
 
 metadata:
   description: Qwen3.5 122B A10B (upstream, FP8 quant) SGLang
