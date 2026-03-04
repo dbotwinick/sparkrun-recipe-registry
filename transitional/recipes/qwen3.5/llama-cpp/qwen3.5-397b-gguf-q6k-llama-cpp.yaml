@@ -9,12 +9,15 @@ metadata:
   model_params: 397B
   model_dtype: q6_k
 
-defaults:  # TODO: --threads,
+defaults:
   port: 8000
   host: 0.0.0.0
+  max_model_len: 262144
+  tensor_parallel: 1
   n_gpu_layers: 99
-  ctx_size: 262144
-  split_mode: layer  # TODO: test performance of row
+
+benchmark:
+  tokenizer: Qwen/Qwen3.5-122B-A10B
 
 command: |
   llama-server \
@@ -22,9 +25,8 @@ command: |
       --host {host} \
       --port {port} \
       --n-gpu-layers {n_gpu_layers} \
-      --ctx-size {ctx_size} \
+      --ctx-size {max_model_len} \
       --flash-attn on \
       --jinja \
-      --split-mode {split_mode} \
       --no-webui \
       --no-mmap
