@@ -28,7 +28,6 @@ command: |
   --port {port} \
   --host {host} \
   --load-format fastsafetensors \
-  --dtype bfloat16 \
   --enable-prefix-caching \
   --attention-backend {attention_backend} \
   --enable-auto-tool-choice \
