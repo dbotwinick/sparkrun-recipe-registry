@@ -7,7 +7,6 @@ metadata:
   description: Qwen3-Coder-Next-int4-AutoRound adapted from https://spark-arena.com/api/recipes/0c3705c9-8e54-45a0-acca-3d58f1f703a7/raw
 
 mods:
-  - fix-qwen3-coder-next
   - fix-qwen3-next-autoround
 
 defaults:
