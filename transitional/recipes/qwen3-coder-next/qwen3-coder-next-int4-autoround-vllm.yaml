@@ -26,6 +26,7 @@ command: |
   vllm serve {model} \
   --max-model-len {max_model_len} \
   --gpu-memory-utilization {gpu_memory_utilization} \
+  -tp {tensor_parallel} \
   --port {port} \
   --host {host} \
   --load-format fastsafetensors \
