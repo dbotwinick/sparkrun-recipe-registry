@@ -1,6 +1,7 @@
 model: Intel/Qwen3-Coder-Next-int4-AutoRound
 runtime: vllm
 min_nodes: 1
+max_nodes: 1
 container: vllm-node-latest
 
 metadata:
