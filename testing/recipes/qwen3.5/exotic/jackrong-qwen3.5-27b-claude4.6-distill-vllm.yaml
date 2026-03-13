@@ -29,6 +29,7 @@ command: |
       --reasoning-parser {reasoning_parser} \
       --tool-call-parser {tool_call_parser} \
       --language-model-only \
+      --chat-template unsloth.jinja \
       --enable-auto-tool-choice \
       --enable-prefix-caching \
       --trust-remote-code
