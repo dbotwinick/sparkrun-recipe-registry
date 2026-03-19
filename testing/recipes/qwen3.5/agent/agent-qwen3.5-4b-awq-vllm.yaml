@@ -1,0 +1,43 @@
+recipe_version: "2"
+model: cyankiwi/Qwen3.5-4B-AWQ-BF16-INT4
+min_nodes: 1
+runtime: vllm
+container: vllm-node-tf5
+
+metadata:
+  description: "Qwen3.5 4B AWQ — sparkrun agent model (tool-calling optimized)"
+  maintainer: "scitrera.ai <open-source-team@scitrera.com>"
+  category: agent
+  model_dtype: awq4
+
+build_args:
+  - "--tf5"
+
+mods:
+  - mods/fix-qwen3.5-chat-template
+
+defaults:
+  port: 52001
+  host: 0.0.0.0
+  tensor_parallel: 1
+  gpu_memory_utilization: 0.125
+  max_model_len: 131072
+  served_model_name: sparkrun-agent
+  reasoning_parser: qwen3
+  tool_call_parser: qwen3_coder
+
+command: |
+  vllm serve \
+      {model} \
+      --served-model-name {served_model_name} \
+      --gpu-memory-utilization {gpu_memory_utilization} \
+      -tp {tensor_parallel} \
+      --host {host} \
+      --port {port} \
+      --max-model-len {max_model_len} \
+      --reasoning-parser {reasoning_parser} \
+      --enable-auto-tool-choice \
+      --tool-call-parser {tool_call_parser} \
+      --trust-remote-code \
+      --chat-template unsloth.jinja \
+      --language-model-only
