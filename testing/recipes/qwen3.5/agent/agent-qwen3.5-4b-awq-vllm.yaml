@@ -1,5 +1,5 @@
 recipe_version: "2"
-model: cyankiwi/Qwen3.5-4B-AWQ-BF16-INT4
+model: cyankiwi/Qwen3.5-4B-AWQ-4bit
 min_nodes: 1
 runtime: vllm
 container: vllm-node-tf5
@@ -15,7 +15,6 @@ build_args:
 
 mods:
   - mods/fix-qwen3.5-chat-template
-  - mods/fix-qwen3-coder-next
 
 defaults:
   port: 52001
