@@ -20,7 +20,7 @@ defaults:
   port: 52001
   host: 0.0.0.0
   tensor_parallel: 1
-  gpu_memory_utilization: 0.125
+  gpu_memory_utilization: 0.25
   max_model_len: 131072
   served_model_name: sparkrun-agent
   reasoning_parser: qwen3
