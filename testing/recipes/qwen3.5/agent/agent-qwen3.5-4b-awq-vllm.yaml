@@ -15,6 +15,7 @@ build_args:
 
 mods:
   - mods/fix-qwen3.5-chat-template
+  - mods/fix-qwen3-coder-next
 
 defaults:
   port: 52001
