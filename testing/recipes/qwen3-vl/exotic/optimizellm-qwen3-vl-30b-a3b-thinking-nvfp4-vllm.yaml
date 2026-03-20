@@ -1,0 +1,43 @@
+model: OptimizeLLM/Qwen3-VL-30B-A3B-Thinking-NVFP4
+runtime: vllm
+container: vllm-node-tf5
+
+metadata:
+  description: OptimizeLLM/Qwen3-VL-30B-A3B-Thinking-NVFP4 — NVFP4-quantized Qwen3-VL 30B with reasoning support
+
+build_args:
+  - "--tf5"
+
+env:
+  VLLM_USE_FLASHINFER_MOE_FP4: "0"
+  VLLM_TEST_FORCE_FP8_MARLIN: "1"
+  VLLM_NVFP4_GEMM_BACKEND: marlin
+  PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
+
+defaults:
+  port: 8000
+  host: 0.0.0.0
+  tensor_parallel: 1
+  gpu_memory_utilization: 0.90
+  max_model_len: 65536
+  max_num_seqs: 128
+  kv_cache_dtype: fp8
+  reasoning_parser: qwen3_vl
+
+pre_exec:
+  - cp "$(find /root/.cache/huggingface/ -path "*OptimizeLLM--Qwen3-VL-30B-A3B-Thinking-NVFP4/**/qwen3_vl_reasoning_parser.py" 2>/dev/null | head -1)" /tmp/qwen3_vl_reasoning_parser.py
+
+command: |
+  vllm serve \
+      {model} \
+      --gpu-memory-utilization {gpu_memory_utilization} \
+      -tp {tensor_parallel} \
+      --host {host} \
+      --port {port} \
+      --max-model-len {max_model_len} \
+      --max-num-seqs {max_num_seqs} \
+      --kv-cache-dtype {kv_cache_dtype} \
+      --reasoning-parser-plugin "/tmp/qwen3_vl_reasoning_parser.py" \
+      --reasoning-parser {reasoning_parser} \
+      --enable-prefix-caching \
+      --trust-remote-code
