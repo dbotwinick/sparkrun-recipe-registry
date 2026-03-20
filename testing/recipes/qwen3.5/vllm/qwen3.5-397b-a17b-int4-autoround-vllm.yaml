@@ -10,15 +10,15 @@ mods:
   - mods/fix-qwen3.5-autoround
   - mods/fix-qwen3.5-chat-template
   - mods/gpu-mem-util-gb
-  - mods/fix-qwen3.5-tp4-marlin
+  - mods/fix-qwen35-tp4-marlin
 
 defaults:
   port: 8000
   host: 0.0.0.0
   tensor_parallel: 2
-  max_model_len: 131072
-  max_num_seqs: 2
-  gpu_memory_utilization_gb: 105
+  max_model_len: 262144
+  #  max_num_seqs: 2
+  gpu_memory_utilization_gb: 110
   reasoning_parser: qwen3
   tool_call_parser: qwen3_coder
   max_num_batched_tokens: 8192
@@ -27,11 +27,11 @@ defaults:
 env:
   VLLM_MARLIN_USE_ATOMIC_ADD: "1"
 
+# --max-num-seqs {max_num_seqs} \
 command: |
   vllm serve \
       {model} \
       --max-model-len {max_model_len} \
-      --max-num-seqs {max_num_seqs} \
       --gpu-memory-utilization-gb {gpu_memory_utilization_gb} \
       --port {port}   \
       --host {host} \
