@@ -10,6 +10,7 @@ mods:
   - mods/fix-qwen3.5-autoround
   - mods/fix-qwen3.5-chat-template
   - mods/gpu-mem-util-gb
+  - mods/fix-qwen3.5-tp4-marlin
 
 defaults:
   port: 8000
