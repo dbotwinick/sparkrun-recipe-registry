@@ -1,7 +1,7 @@
 model: Qwen/Qwen3-1.7B
 runtime: vllm
 min_nodes: 1
-container: scitrera/dgx-spark-vllm:0.16.0-t5
+container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly-tf5:latest
 
 metadata:
   description: Qwen3 1.7B -- small test model, solo or cluster
