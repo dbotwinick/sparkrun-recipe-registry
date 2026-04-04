@@ -1,0 +1,32 @@
+model: scitrera/qwopus3.5-9b-v3-awq4
+runtime: vllm
+container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly-tf5:latest
+
+metadata:
+  description: scitrera/qwopus3.5-9b-v3-awq4 (AWQ4 quant of Jackrong/Qwopus3.5-9B-v3)
+
+build_args:
+  - "--tf5"
+
+defaults:
+  port: 8000
+  host: 0.0.0.0
+  tensor_parallel: 1
+  pipeline_parallel: 1
+  gpu_memory_utilization: 0.85
+  reasoning_parser: qwen3
+  tool_call_parser: qwen3_coder
+
+command: |
+  vllm serve \
+      {model} \
+      --gpu-memory-utilization {gpu_memory_utilization} \
+      -tp {tensor_parallel} \
+      -pp {pipeline_parallel} \
+      --host {host} \
+      --port {port} \
+      --reasoning-parser {reasoning_parser} \
+      --tool-call-parser {tool_call_parser} \
+      --enable-auto-tool-choice \
+      --enable-prefix-caching \
+      --trust-remote-code
