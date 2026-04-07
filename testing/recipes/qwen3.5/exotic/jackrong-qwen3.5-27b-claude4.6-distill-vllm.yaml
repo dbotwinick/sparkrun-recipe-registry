@@ -1,6 +1,7 @@
+recipe_version: '2'
 model: Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled
 runtime: vllm
-container: vllm-node-tf5
+container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly-tf5:latest
 
 metadata:
   description: Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled
@@ -15,6 +16,7 @@ defaults:
   port: 8000
   host: 0.0.0.0
   tensor_parallel: 1
+  pipeline_parallel: 1
   gpu_memory_utilization: 0.85
   reasoning_parser: qwen3
   tool_call_parser: qwen3_coder
@@ -24,6 +26,7 @@ command: |
       {model} \
       --gpu-memory-utilization {gpu_memory_utilization} \
       -tp {tensor_parallel} \
+      -pp {pipeline_parallel} \
       --host {host} \
       --port {port} \
       --reasoning-parser {reasoning_parser} \
