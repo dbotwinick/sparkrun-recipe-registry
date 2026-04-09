@@ -1,13 +1,19 @@
+recipe_version: '2'
 model: Qwen/Qwen3-1.7B
 runtime: sglang
 min_nodes: 1
-container: scitrera/dgx-spark-sglang:0.5.9-t5
+container: scitrera/dgx-spark-sglang:0.5.10
 
 metadata:
   description: Qwen3 1.7B -- small test model, solo or cluster (SGLang)
   maintainer: scitrera.ai <open-source-team@scitrera.com>
   model_params: 1.7B
   model_dtype: bf16
+
+# TEMPORARY! JIT Building requires root in the container
+# NOTE: The container still does not need to be privileged.
+executor_config:
+  user: root
 
 defaults:
   port: 8000
@@ -17,7 +23,7 @@ defaults:
   served_model_name: qwen3-1.7b
 
 command: |
-  python3 -m sglang.launch_server \
+  sglang serve \
       --model-path {model} \
       --served-model-name {served_model_name} \
       --mem-fraction-static {gpu_memory_utilization} \
